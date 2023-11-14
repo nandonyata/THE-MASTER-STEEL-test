@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"service-user/config"
 	"service-user/controller"
+	"service-user/middleware"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -20,6 +21,7 @@ func main() {
 	})
 	app.Post("/user/register", controller.Register)
 	app.Post("/user/login", controller.Login)
+	app.Post("/user/auth", middleware.Authentication, controller.Auth)
 
 	port := 3001
 	fmt.Printf("Service user is running on :%d...\n", port)

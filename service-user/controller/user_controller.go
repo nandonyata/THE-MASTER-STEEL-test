@@ -86,3 +86,7 @@ func Login(c *fiber.Ctx) error {
 		Data: result,
 	})
 }
+
+func Auth(c *fiber.Ctx) error {
+	return c.JSON("OK")
+}
