@@ -2,24 +2,24 @@ package main
 
 import (
 	"fmt"
+	"service-user/config"
+	"service-user/controller"
 
 	"github.com/gofiber/fiber/v2"
 )
 
-// Greeting struct to represent the response message
-type Greeting struct {
-	Message string `json:"message"`
+func init() {
+	config.GetMongoDatabase()
 }
 
 func main() {
 	app := fiber.New()
 
-	app.Get("/api/greet", func(c *fiber.Ctx) error {
-		name := c.Query("name", "Guest")
-		response := Greeting{Message: fmt.Sprintf("Hello, %s!", name)}
-
-		return c.JSON(response)
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("Hi from service-user")
 	})
+	app.Post("/user/register", controller.Register)
+	app.Post("/user/login", controller.Login)
 
 	port := 3001
 	fmt.Printf("Service user is running on :%d...\n", port)
@@ -28,5 +28,4 @@ func main() {
 	if err != nil {
 		fmt.Printf("Error starting Service user: %v\n", err)
 	}
-
 }
