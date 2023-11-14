@@ -10,9 +10,9 @@ import (
 
 var jwt_secret string = "this_is_jwt_secret_shhh"
 
-func SignToken(id string) string {
+func SignToken(email string) string {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"id": id,
+		"email": email,
 	})
 
 	tokenString, err := token.SignedString([]byte(jwt_secret))

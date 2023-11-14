@@ -72,7 +72,7 @@ func Login(c *fiber.Ctx) error {
 		})
 	}
 
-	access_token := helpers.SignToken(result.Id)
+	access_token := helpers.SignToken(requestBody.Email)
 
 	return c.JSON(struct{
 		Code int 

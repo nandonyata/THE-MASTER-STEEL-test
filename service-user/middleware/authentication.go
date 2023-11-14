@@ -24,12 +24,12 @@ func Authentication(c *fiber.Ctx) error {
 		return c.Status(401).SendString("Invalid token: Failed to verify token")
 	}
 
-	fmt.Println(checkToken, "CEKKKK" ,checkToken["id"])
+	fmt.Println(checkToken, "CEKKKK" ,checkToken["email"])
 
 	var user model.User
 	db := config.GetMongoDatabase().Collection("user")
 
-	err = db.FindOne(context.TODO(), bson.D{{"_id", checkToken["id"]}}).Decode(&user)
+	err = db.FindOne(context.TODO(), bson.D{{"email", checkToken["email"]}}).Decode(&user)
 	if err != nil {
 		fmt.Println(err, "Error fetching user from database")
 		return c.Status(401).SendString("Invalid token: User not found")
