@@ -14,6 +14,7 @@ func main() {
 		return c.SendString("Hi from api gateway")
 	})
 	app.Post("/login", controller.UserLogin)
+	app.Post("/employee", controller.CreateEmployee)
 
 	port := 3000
 	fmt.Printf("api gateway is running on :%d...\n", port)
